@@ -27,10 +27,10 @@ public class Jugador extends Entidad{
 			setY(getY() + getVelocidad());
 		}
 		if(mT.getTeclaDer()) {
-            setX(getX() - getVelocidad());
+            setX(getX() + getVelocidad());
         }
 		if(mT.getTeclaIzq()) {
-            setX(getX() + getVelocidad());
+            setX(getX() - getVelocidad());
 		}
     }
     public void draw(Graphics2D g2){
