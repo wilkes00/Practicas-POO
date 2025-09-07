@@ -1,5 +1,6 @@
 package Main;
 
+import entidad.Jugador;
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Graphics;
@@ -18,8 +19,8 @@ public class GamePanel extends JPanel implements Runnable{
 	
 	Thread hebraJuego;
 	ManejadorTeclas mT = new ManejadorTeclas();
+	Jugador jugador = new Jugador(this, mT);
 	private int FPS = 60;
-	int playerX = 100, playerY = 100, velocidadJugador = 4;
 	
 	public GamePanel() {
 		this.setPreferredSize(new Dimension(this.anchoPantalla, this.altoPantalla));
@@ -52,26 +53,17 @@ public class GamePanel extends JPanel implements Runnable{
 		}
 	}
 	public void update() {
-		if(mT.getTeclaArriba()) {
-			playerY -= velocidadJugador;
-		}
-		if(mT.getTeclaAbajo()) {
-			playerY += velocidadJugador;
-		}
-		if(mT.getTeclaDer()) {
-			playerX += velocidadJugador;
-		}
-		if(mT.getTeclaIzq()) {
-			playerX -= velocidadJugador;
-		}
+		jugador.update();
 	}
 	@Override
 	public void paintComponent(Graphics g) {
 		super.paintComponent(g);
 		Graphics2D g2 = (Graphics2D)g;
-		g2.setColor(Color.white);
-		g2.fillRect(playerX, playerY, sizeTile, sizeTile);
+		jugador.draw(g2);
 		g2.dispose();
+	}
+	public int getTam(){
+		return this.sizeTile;
 	}
 }
 //Metodos getter a implementar
